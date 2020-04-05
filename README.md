@@ -356,3 +356,23 @@ We are also working on integrating new datasets and tasks. These may not be avai
 ## Disclaimer
 
 This is not an officially supported Google product.
+
+# Notes
+## Run benchmark example using SIFT
+```
+python run.py --subset=val --json_metho=example/configs/example-validation-inlier-th.json --run_mode=interactive --path_data=/home/ken/data/phototourism/imw2020-valid
+```
+## Run benchmark on superpoint
+```
+# Run this in the baseline package
+cd image-matching-benchmark-baselines
+python third_party/superpoint_forked/superpoint.py --cuda --num_kp=2048 --method_name=superpoint_default_2048 --sequences_folder=/home/ken/data/phototourism_baseline
+
+# Run this in the benchmark package
+cd image-matching-benchmark
+# Move baseline generated kf, descriptor, and scores to benchmark-results
+python import_features.py --path_features=../benchmark-features/superpoint_default_2048 --kp_name=superpoint_default_2048_kp --desc_name=superpoint_default_2048_desc --num_keypoints=2048
+# Run the actual benchmark
+python run.py --subset=val --json_metho=example/configs/superpoint-validation-inlier-th.json --run_mode=interactive --path_data=/home/ken/data/phototourism/imw2020-valid
+```
+
