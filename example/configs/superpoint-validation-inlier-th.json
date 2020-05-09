@@ -4,7 +4,7 @@
             "json_label": "superpoint-2k-degensac-inlier-th-0.1",
             "keypoint": "superpoint-default-2048-kp",
             "descriptor": "superpoint-default-2048-desc",
-            "num_keypoints": 2048,
+            "num_keypoints": 2048
         },
         "config_phototourism_stereo": {
             "use_custom_matches": false,
@@ -15,15 +15,15 @@
                  "num_nn": 1,
                  "filtering": {
                      "type": "snn_ratio_pairwise",
-                     "threshold": 0.9,
+                     "threshold": 0.9
                  },
                  "symmetric": {
                      "enabled": true,
-                     "reduce": "both",
-                 },
+                     "reduce": "both"
+                 }
             },
             "outlier_filter": {
-                "method": "none",
+                "method": "none"
             },
             "geom": {
                 "method": "cmp-degensac-f",
@@ -31,260 +31,8 @@
                 "confidence": 0.999999,
                 "max_iter": 100000,
                 "error_type": "sampson",
-                "degeneracy_check": true,
-            },
-        },
-    },
-    {
-        "config_common": {
-            "json_label": "superpoint-2k-degensac-inlier-th-0.25",
-            "keypoint": "superpoint-default-2048-kp",
-            "descriptor": "superpoint-default-2048-desc",
-            "num_keypoints": 2048,
-        },
-        "config_phototourism_stereo": {
-            "use_custom_matches": false,
-            "matcher": {
-                 "method": "nn",
-                 "distance": "L2",
-                 "flann": true,
-                 "num_nn": 1,
-                 "filtering": {
-                     "type": "snn_ratio_pairwise",
-                     "threshold": 0.9,
-                 },
-                 "symmetric": {
-                     "enabled": true,
-                     "reduce": "both",
-                 },
-            },
-            "outlier_filter": {
-                "method": "none",
-            },
-            "geom": {
-                "method": "cmp-degensac-f",
-                "threshold": 0.25,
-                "confidence": 0.999999,
-                "max_iter": 100000,
-                "error_type": "sampson",
-                "degeneracy_check": true,
-            },
-        },
-    },
-    {
-        "config_common": {
-            "json_label": "superpoint-2k-degensac-inlier-th-0.5",
-            "keypoint": "superpoint-default-2048-kp",
-            "descriptor": "superpoint-default-2048-desc",
-            "num_keypoints": 2048,
-        },
-        "config_phototourism_stereo": {
-            "use_custom_matches": false,
-            "matcher": {
-                 "method": "nn",
-                 "distance": "L2",
-                 "flann": true,
-                 "num_nn": 1,
-                 "filtering": {
-                     "type": "snn_ratio_pairwise",
-                     "threshold": 0.9,
-                 },
-                 "symmetric": {
-                     "enabled": true,
-                     "reduce": "both",
-                 },
-            },
-            "outlier_filter": {
-                "method": "none",
-            },
-            "geom": {
-                "method": "cmp-degensac-f",
-                "threshold": 0.5,
-                "confidence": 0.999999,
-                "max_iter": 100000,
-                "error_type": "sampson",
-                "degeneracy_check": true,
-            },
-        },
-    },
-    {
-        "config_common": {
-            "json_label": "superpoint-2k-degensac-inlier-th-0.75",
-            "keypoint": "superpoint-default-2048-kp",
-            "descriptor": "superpoint-default-2048-desc",
-            "num_keypoints": 2048,
-        },
-        "config_phototourism_stereo": {
-            "use_custom_matches": false,
-            "matcher": {
-                 "method": "nn",
-                 "distance": "L2",
-                 "flann": true,
-                 "num_nn": 1,
-                 "filtering": {
-                     "type": "snn_ratio_pairwise",
-                     "threshold": 0.9,
-                 },
-                 "symmetric": {
-                     "enabled": true,
-                     "reduce": "both",
-                 },
-            },
-            "outlier_filter": {
-                "method": "none",
-            },
-            "geom": {
-                "method": "cmp-degensac-f",
-                "threshold": 0.75,
-                "confidence": 0.999999,
-                "max_iter": 100000,
-                "error_type": "sampson",
-                "degeneracy_check": true,
-            },
-        },
-    },
-    {
-        "config_common": {
-            "json_label": "superpoint-2k-degensac-inlier-th-1",
-            "keypoint": "superpoint-default-2048-kp",
-            "descriptor": "superpoint-default-2048-desc",
-            "num_keypoints": 2048,
-        },
-        "config_phototourism_stereo": {
-            "use_custom_matches": false,
-            "matcher": {
-                 "method": "nn",
-                 "distance": "L2",
-                 "flann": true,
-                 "num_nn": 1,
-                 "filtering": {
-                     "type": "snn_ratio_pairwise",
-                     "threshold": 0.9,
-                 },
-                 "symmetric": {
-                     "enabled": true,
-                     "reduce": "both",
-                 },
-            },
-            "outlier_filter": {
-                "method": "none",
-            },
-            "geom": {
-                "method": "cmp-degensac-f",
-                "threshold": 1,
-                "confidence": 0.999999,
-                "max_iter": 100000,
-                "error_type": "sampson",
-                "degeneracy_check": true,
-            },
-        },
-    },
-    {
-        "config_common": {
-            "json_label": "superpoint-2k-degensac-inlier-th-1.5",
-            "keypoint": "superpoint-default-2048-kp",
-            "descriptor": "superpoint-default-2048-desc",
-            "num_keypoints": 2048,
-        },
-        "config_phototourism_stereo": {
-            "use_custom_matches": false,
-            "matcher": {
-                 "method": "nn",
-                 "distance": "L2",
-                 "flann": true,
-                 "num_nn": 1,
-                 "filtering": {
-                     "type": "snn_ratio_pairwise",
-                     "threshold": 0.9,
-                 },
-                 "symmetric": {
-                     "enabled": true,
-                     "reduce": "both",
-                 },
-            },
-            "outlier_filter": {
-                "method": "none",
-            },
-            "geom": {
-                "method": "cmp-degensac-f",
-                "threshold": 1.5,
-                "confidence": 0.999999,
-                "max_iter": 100000,
-                "error_type": "sampson",
-                "degeneracy_check": true,
-            },
-        },
-    },
-    {
-        "config_common": {
-            "json_label": "superpoint-2k-degensac-inlier-th-2",
-            "keypoint": "superpoint-default-2048-kp",
-            "descriptor": "superpoint-default-2048-desc",
-            "num_keypoints": 2048,
-        },
-        "config_phototourism_stereo": {
-            "use_custom_matches": false,
-            "matcher": {
-                 "method": "nn",
-                 "distance": "L2",
-                 "flann": true,
-                 "num_nn": 1,
-                 "filtering": {
-                     "type": "snn_ratio_pairwise",
-                     "threshold": 0.9,
-                 },
-                 "symmetric": {
-                     "enabled": true,
-                     "reduce": "both",
-                 },
-            },
-            "outlier_filter": {
-                "method": "none",
-            },
-            "geom": {
-                "method": "cmp-degensac-f",
-                "threshold": 2,
-                "confidence": 0.999999,
-                "max_iter": 100000,
-                "error_type": "sampson",
-                "degeneracy_check": true,
-            },
-        },
-    },
-    {
-        "config_common": {
-            "json_label": "superpoint-2k-degensac-inlier-th-5",
-            "keypoint": "superpoint-default-2048-kp",
-            "descriptor": "superpoint-default-2048-desc",
-            "num_keypoints": 2048,
-        },
-        "config_phototourism_stereo": {
-            "use_custom_matches": false,
-            "matcher": {
-                 "method": "nn",
-                 "distance": "L2",
-                 "flann": true,
-                 "num_nn": 1,
-                 "filtering": {
-                     "type": "snn_ratio_pairwise",
-                     "threshold": 0.9,
-                 },
-                 "symmetric": {
-                     "enabled": true,
-                     "reduce": "both",
-                 },
-            },
-            "outlier_filter": {
-                "method": "none",
-            },
-            "geom": {
-                "method": "cmp-degensac-f",
-                "threshold": 5,
-                "confidence": 0.999999,
-                "max_iter": 100000,
-                "error_type": "sampson",
-                "degeneracy_check": true,
-            },
-        },
+                "degeneracy_check": true
+            }
+        }
     }
 ]

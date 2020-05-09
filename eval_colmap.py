@@ -253,10 +253,12 @@ def run_colmap_for_bag(cfg):
             '--database_path',
             os.path.join(colmap_output_path, 'databases.db')
         ]
-        cmd += ['--output_path', colmap_output_path]
+        # 3.4 uses --export_path but 3.6 uses --output_path
+        cmd += ['--export_path', colmap_output_path]
         cmd += ['--Mapper.min_model_size', str(cfg.colmap_min_model_size)]
         colmap_res = subprocess.run(cmd)
         if colmap_res.returncode != 0:
+            print(cmd)
             raise RuntimeError(' -- COLMAP failed to run mapper!')
 
         # Delete temp directory after working

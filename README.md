@@ -375,4 +375,77 @@ python import_features.py --path_features=../benchmark-features/superpoint_defau
 # Run the actual benchmark
 python run.py --subset=val --json_metho=example/configs/superpoint-validation-inlier-th.json --run_mode=interactive --path_data=/home/ken/data/phototourism/imw2020-valid
 ```
+## Run hardnet with sift
+```
+python import_features.py --path_features=../benchmark-features/sift8k_8000_hardnet/ --kp_name=sift8k_8000_hardnet_kp --desc_name=sift8k_8000_hardnet_desc --num_keypoints=8000
 
+python run.py --subset=val --json_metho=example/configs/hardnet-validation-inlier-th.json --run_mode=interactive --path_data=/home/ken/data/phototourism/imw2020-valid
+
+```
+
+## Troubleshoot
+
+### Eigenvalues did not converge (not resolved)
+```
+Traceback (most recent call last):
+  File "/home/ken/anaconda3/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py", line 418, in _process_worker
+    r = call_item()
+  File "/home/ken/anaconda3/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py", line 272, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "/home/ken/anaconda3/lib/python3.7/site-packages/joblib/_parallel_backends.py", line 567, in __call__
+    return self.func(*args, **kwargs)
+  File "/home/ken/anaconda3/lib/python3.7/site-packages/joblib/parallel.py", line 225, in __call__
+    for func, args, kwargs in self.items]
+  File "/home/ken/anaconda3/lib/python3.7/site-packages/joblib/parallel.py", line 225, in <listcomp>
+    for func, args, kwargs in self.items]
+  File "/home/ken/workspace/image-matching-benchmark/utils/stereo_helper.py", line 309, in compute_stereo_metrics_from_E
+    E, dR, dT)
+  File "/home/ken/workspace/image-matching-benchmark/utils/eval_helper.py", line 136, in eval_essential_matrix
+    err_q, err_t = evaluate_R_t(dR, dt, R, t)
+  File "/home/ken/workspace/image-matching-benchmark/utils/eval_helper.py", line 107, in evaluate_R_t
+    q = quaternion_from_matrix(R)
+  File "/home/ken/workspace/image-matching-benchmark/third_party/utils/eval_helper.py", line 171, in quaternion_from_matrix
+    w, V = np.linalg.eigh(K)
+  File "<__array_function__ internals>", line 6, in eigh
+  File "/home/ken/anaconda3/lib/python3.7/site-packages/numpy/linalg/linalg.py", line 1456, in eigh
+    w, vt = gufunc(a, signature=signature, extobj=extobj)
+  File "/home/ken/anaconda3/lib/python3.7/site-packages/numpy/linalg/linalg.py", line 103, in _raise_linalgerror_eigenvalues_nonconvergence
+    raise LinAlgError("Eigenvalues did not converge")
+numpy.linalg.LinAlgError: Eigenvalues did not converge
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "compute_stereo.py", line 216, in <module>
+    main(cfg)
+  File "compute_stereo.py", line 103, in main
+    for pair in tqdm(pairs_per_th['0.0']))
+  File "/home/ken/anaconda3/lib/python3.7/site-packages/joblib/parallel.py", line 934, in __call__
+    self.retrieve()
+  File "/home/ken/anaconda3/lib/python3.7/site-packages/joblib/parallel.py", line 833, in retrieve
+    self._output.extend(job.get(timeout=self.timeout))
+  File "/home/ken/anaconda3/lib/python3.7/site-packages/joblib/_parallel_backends.py", line 521, in wrap_future_result
+    return future.result(timeout=timeout)
+  File "/home/ken/anaconda3/lib/python3.7/concurrent/futures/_base.py", line 428, in result
+    return self.__get_result()
+  File "/home/ken/anaconda3/lib/python3.7/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+numpy.linalg.LinAlgError: Eigenvalues did not converge
+```
+Find which BLAS library numpy is using based on https://stackoverflow.com/questions/37184618/find-out-if-which-blas-library-is-used-by-numpy
+```
+ldd /home/ken/anaconda3/lib/python3.7/site-packages/numpy/core/_multiarray_umath.cpython-37m-x86_64-linux-gnu.so
+```
+
+Install libopenblas-base (>=0.2.15 is recommended)
+```
+sudo apt install libopenblas-base
+```
+Reference: https://github.com/numpy/numpy/blob/master/INSTALL.rst.txt
+
+Switch to openblas
+```
+conda uninstall blas --force
+conda install "blas=*=openblas"
+```
