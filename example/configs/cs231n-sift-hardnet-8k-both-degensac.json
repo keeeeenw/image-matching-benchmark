@@ -1,0 +1,68 @@
+[
+    {
+        "config_phototourism_stereo": {
+            "matcher": {
+                "flann": false,
+                "num_nn": 1,
+                "filtering": {
+                    "threshold": 0.9,
+                    "type": "snn_ratio_pairwise"
+                },
+                "method": "nn",
+                "distance": "L2",
+                "symmetric": {
+                    "reduce": "both",
+                    "enabled": true
+                }
+            },
+            "outlier_filter": {
+                "method": "none"
+            },
+            "use_custom_matches": false,
+            "geom": {
+                "threshold": 0.5,
+                "max_iter": 100000,
+                "confidence": 0.999999,
+                "method": "cmp-degensac-f",
+                "degeneracy_check": true,
+                "error_type": "sampson"
+            }
+        },
+        "config_common": {
+            "json_label": "sid-00542-sift-hardnet-8k-both-degensac",
+            "num_keypoints": 8000,
+            "keypoint": "sift8k-8000-hardnet-kp",
+            "descriptor": "sift8k-8000-hardnet-desc"
+        },
+        "config_phototourism_multiview": {
+            "matcher": {
+                "flann": false,
+                "num_nn": 1,
+                "filtering": {
+                    "threshold": 0.9,
+                    "type": "snn_ratio_pairwise"
+                },
+                "method": "nn",
+                "distance": "L2",
+                "symmetric": {
+                    "reduce": "both",
+                    "enabled": true
+                }
+            },
+            "outlier_filter": {
+                "method": "none"
+            },
+            "use_custom_matches": false,
+            "colmap": {}
+        },
+        "metadata": {
+            "method_name": "Config based on [sid:00542] sift and hardnet64 train scale(12)",
+            "link_to_pdf": "REDACTED UNTIL DEADLINE",
+            "publish_anonymously": true,
+            "contact_email": "REDACTED UNTIL DEADLINE",
+            "link_to_website": "REDACTED UNTIL DEADLINE",
+            "authors": "REDACTED",
+            "method_description": "REDACTED UNTIL DEADLINE"
+        }
+    }
+]

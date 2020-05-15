@@ -377,9 +377,29 @@ python run.py --subset=val --json_metho=example/configs/superpoint-validation-in
 ```
 ## Run hardnet with sift
 ```
+# In the baseline repo, after adding stanford dataset name to test.json
+python detect_sift_keypoints_and_extract_patches.py 
+--scenes_folder=/home/ken/data/phototourism_baseline_stanford/ --subset=test
+
+python extract_descriptors_hardnet.py --subset=test
+
+# In this repo
+
+# For test subset only
+python import_features.py --path_features=../benchmark-feature
+s/sift8k_8000_hardnet/ --kp_name=sift8k_8000_hardnet_kp --desc_name=sift8k_8000_hardnet_desc --num_keypoints=8000 --subset=test
+
+# For all dataset, note that because the stanford dataset does not have ground truth, we cannot evaluate it
 python import_features.py --path_features=../benchmark-features/sift8k_8000_hardnet/ --kp_name=sift8k_8000_hardnet_kp --desc_name=sift8k_8000_hardnet_desc --num_keypoints=8000
 
 python run.py --subset=val --json_metho=example/configs/hardnet-validation-inlier-th.json --run_mode=interactive --path_data=/home/ken/data/phototourism/imw2020-valid
+
+# Colmap command
+['colmap', 'mapper', '--image_path', '../benchmark-results/phototourism/reichstag/sift8k-8000-hardnet-kp_8000_sift8k-8000-hardnet-desc/nn_bf_numnn-1_dist-l2_sym-both_filter-snn_ratio_pairwise-0.9/no_filter/multiview-fold-0/bag_size_5/bag_id_00007/temp_colmap/images', '--database_path', '../benchmark-results/phototourism/reichstag/sift8k-8000-hardnet-kp_8000_sift8k-8000-hardnet-desc/nn_bf_numnn-1_dist-l2_sym-both_filter-snn_ratio_pairwise-0.9/no_filter/multiview-fold-0/bag_size_5/bag_id_00007/colmap/databases.db', '--output_path', '../benchmark-results/phototourism/reichstag/sift8k-8000-hardnet-kp_8000_sift8k-8000-hardnet-desc/nn_bf_numnn-1_dist-l2_sym-both_filter-snn_ratio_pairwise-0.9/no_filter/multiview-fold-0/bag_size_5/bag_id_00007/colmap', '--Mapper.min_model_size', '3']
+
+colmap mapper --image_path ../benchmark-results/phototourism/reichstag/sift8k-8000-hardnet-kp_8000_sift8k-8000-hardnet-desc/nn_bf_numnn-1_dist-l2_sym-both_filter-snn_ratio_pairwise-0.9/no_filter/multiview-fold-0/bag_size_5/bag_id_00007/temp_colmap/images --database_path ../benchmark-results/phototourism/reichstag/sift8k-8000-hardnet-kp_8000_sift8k-8000-hardnet-desc/nn_bf_numnn-1_dist-l2_sym-both_filter-snn_ratio_pairwise-0.9/no_filter/multiview-fold-0/bag_size_5/bag_id_00007/colmap/databases.db --output_path ../benchmark-results/phototourism/reichstag/sift8k-8000-hardnet-kp_8000_sift8k-8000-hardnet-desc/nn_bf_numnn-1_dist-l2_sym-both_filter-snn_ratio_pairwise-0.9/no_filter/multiview-fold-0/bag_size_5/bag_id_00007/colmap --Mapper.min_model_size 3
+
+
 
 ```
 
