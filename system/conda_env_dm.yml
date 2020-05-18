@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: sfm1
+name: sfm
 channels:
 - defaults
 dependencies:
@@ -112,5 +112,3 @@ dependencies:
   - numexpr==2.6.9
   - prompt-toolkit==1.0.15
   - tables==3.4.4
-prefix: /home/mishkdmy/.conda/envs/sfm
-
