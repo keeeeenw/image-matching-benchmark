@@ -148,6 +148,44 @@ def eval_multiview(dep_list, cfg, bag_size_list, bag_size_num, job_dict):
     return colmap_jobs
 
 
+def run_colmap_mapper(dep_list, cfg, job_dict):
+    colmap_jobs = []
+    job_key = create_job_key('multiview', cfg)
+    # Update dependency
+    dep_str = None
+    if len(dep_list) > 0:
+        dep_str = ','.join(dep_list)
+
+    # COLMAP mapper run
+    cfg_colmap = deepcopy(cfg)
+    cmd_list = []
+
+    # Check if colmap run is complete -- queue
+    if not is_colmap_complete(cfg_colmap):
+        # Check if other program is doing the same job
+        if job_key in job_dict:
+            print(' -- {} is already running on {}'.format('multiview',
+                                                           job_dict[job_key]))
+            return job_dict[job_key].split('-')
+
+        cmd_list += [create_sh_cmd('eval_colmap.py', cfg_colmap)]
+
+    # Check cfg_list to retrieve the estimated runtime. Queue
+    # cmd_list and reset both lists if we are expected to have
+    # less than 30 min of wall time after this job.
+    t_split = [float(t) for t in cfg.cc_time.split(':')]
+    if estimate_runtime([cfg]) >= t_split[0] + \
+            t_split[1] / 60 - 0.5:
+        colmap_jobs += [create_and_queue_jobs(cmd_list, cfg, dep_str)]
+    # Queue any leftover job
+    if len(cmd_list) > 0:
+        colmap_jobs += [create_and_queue_jobs(cmd_list, cfg, dep_str)]
+    # save colmap jobs list under its job key
+    if len(colmap_jobs) != 0:
+        job_dict[job_key] = '-'.join(colmap_jobs)
+    return colmap_jobs
+
+
 def main(cfg):
     ''' Main routine for the benchmark '''
 
@@ -260,6 +298,10 @@ def main(cfg):
                         if task == 'relocalization' and cfg.eval_relocalization:
                             raise NotImplementedError(
                                 'TODO relocalization task')
+
+                        # Run Colmap mapper on the entire set of features and matches
+                        if task =='multiview' and cfg.colmap_mapper:
+                            run_colmap_mapper(match_inlier_jobs, cfg, job_dict)
 
         # Packing -- can be skipped with --skip_packing=True
         # For instance, when only generating visualizations

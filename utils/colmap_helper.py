@@ -75,11 +75,14 @@ def has_colmap_run(cfg):
 def get_colmap_image_path_list(cfg):
     '''Gives a list of all images in this bag.'''
     data_dir = get_data_path(cfg)
-    list_file = os.path.join(
-        data_dir, 'sub_set', '{}bag_{:03d}.txt'.format(cfg.bag_size,
-                                                       cfg.bag_id))
+    if cfg.colmap_mapper:
+        image_path_list = get_fullpath_list(data_dir, 'images')
+    else:
+        list_file = os.path.join(
+            data_dir, 'sub_set', '{}bag_{:03d}.txt'.format(cfg.bag_size,
+                                                           cfg.bag_id))
 
-    image_path_list = parse_file_to_list(list_file, data_dir)
+        image_path_list = parse_file_to_list(list_file, data_dir)
 
     return image_path_list
 

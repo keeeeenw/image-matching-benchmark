@@ -410,6 +410,8 @@ def get_stereo_depth_projection_final_match_file(cfg, th=None):
 def get_colmap_path(cfg):
     '''Returns the path to colmap results for individual bag.'''
 
+    if cfg.colmap_mapper:
+        return os.path.join(get_multiview_path(cfg), 'all')
     return os.path.join(get_multiview_path(cfg),
                         'bag_size_{}'.format(cfg.bag_size),
                         'bag_id_{:05d}'.format(cfg.bag_id))

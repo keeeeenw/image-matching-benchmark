@@ -138,6 +138,11 @@ arg.add_argument('--colmap_min_model_size',
                  type=int,
                  default=3,
                  help='Minimum size to be used for mapper')
+arg.add_argument('--colmap_mapper',
+                 type=str2bool,
+                 default=False,
+                 help='Set to true to run sparse 3D reconstruction '
+                      'on the entire set of features and matches')
 
 # Some configurations for computing matching score
 arg.add_argument(

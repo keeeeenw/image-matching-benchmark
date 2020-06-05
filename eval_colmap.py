@@ -110,8 +110,11 @@ def run_colmap_for_bag(cfg):
 
     matches_dict = load_h5(get_filter_match_file(cfg))
 
-    print('Running COLMAP on bagsize {} -- bag {}'.format(
-        cfg.scene, cfg.bag_size, cfg.bag_id))
+    if cfg.colmap_mapper:
+        print('Running COLMAP mapper')
+    else:
+        print('Running COLMAP on bagsize {} -- bag {}'.format(
+            cfg.scene, cfg.bag_size, cfg.bag_id))
 
     # Additional sanity check to account for crash -- in this case colmap temp
     # directory can exist. This in an indication that you need to remove
@@ -307,8 +310,9 @@ def main(cfg):
     # TODO: would be nice to run this twice if there are errors
     run_colmap_for_bag(cfg)
 
-    # Evaluate its results
-    compute_pose_error(cfg)
+    if not cfg.colmap_mapper:
+        # Evaluate its results
+        compute_pose_error(cfg)
 
 
 if __name__ == '__main__':
